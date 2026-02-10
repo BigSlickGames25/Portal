@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Big Slick Games management portal">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://*.amazonaws.com https://*.execute-api.us-east-1.amazonaws.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none';">
+  <title>Big Slick Games Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient-layer" aria-hidden="true"></div>
+  <div class="portal-app">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-kicker">Big Slick Games</p>
+        <h1>Management Portal</h1>
+        <p class="brand-subtitle">Studio operations and business intelligence</p>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-item is-active" data-screen="overview" type="button">Overview</button>
+        <button class="nav-item" data-screen="finance" type="button">Finance</button>
+        <button class="nav-item" data-screen="users" type="button">Users</button>
+        <button class="nav-item" data-screen="changes" type="button">Game Changes</button>
+        <button class="nav-item" data-screen="calendar" type="button">Calendar</button>
+        <button class="nav-item" data-screen="library" type="button">Game Library</button>
+        <button class="nav-item" data-screen="security" type="button">Security</button>
+      </nav>
+      <section class="sidebar-footer">
+        <p class="eyebrow">Environment</p>
+        <p id="env-label">local</p>
+      </section>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div>
+          <p id="screen-kicker" class="eyebrow">Operations</p>
+          <h2 id="screen-title">Overview</h2>
+        </div>
+        <div class="topbar-actions">
+          <p id="session-user" class="session-user">Session loading...</p>
+          <button id="refresh-btn" class="ghost-btn" type="button">Refresh</button>
+          <p id="clock" class="clock">--:--:--</p>
+        </div>
+      </header>
+      <main id="screen-root" class="screen-root" aria-live="polite"></main>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
