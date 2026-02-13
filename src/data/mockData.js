@@ -174,7 +174,7 @@ export const dashboardData = {
   gameLibrary: [
     {
       id: "phantom-circuit",
-      name: "Phantom Circuit",
+      name: "Poker O Poly",
       genre: "Action RPG",
       platforms: "iOS, Android",
       lifecycle: "live",
@@ -189,7 +189,7 @@ export const dashboardData = {
     },
     {
       id: "neon-drift-rivals",
-      name: "Neon Drift Rivals",
+      name: "21 Stack'Em",
       genre: "Arcade Racer",
       platforms: "iOS, Android, PC",
       lifecycle: "live",
@@ -204,7 +204,7 @@ export const dashboardData = {
     },
     {
       id: "dungeon-ledger",
-      name: "Dungeon Ledger",
+      name: "Racing Suits",
       genre: "Puzzle RPG",
       platforms: "iOS, Android",
       lifecycle: "growth",
@@ -219,7 +219,7 @@ export const dashboardData = {
     },
     {
       id: "skyforge-mercs",
-      name: "Skyforge Mercs",
+      name: "Space Crash",
       genre: "Shooter",
       platforms: "PC, Console",
       lifecycle: "stabilize",
@@ -234,7 +234,7 @@ export const dashboardData = {
     },
     {
       id: "puzzle-syndicate",
-      name: "Puzzle Syndicate",
+      name: "21 Hold'Em",
       genre: "Casual Puzzle",
       platforms: "iOS, Android, Web",
       lifecycle: "live",
@@ -249,7 +249,7 @@ export const dashboardData = {
     },
     {
       id: "atlas-tactica",
-      name: "Atlas Tactica",
+      name: "Deck Realms",
       genre: "Strategy",
       platforms: "PC",
       lifecycle: "alpha",
@@ -261,6 +261,21 @@ export const dashboardData = {
       lastPatch: "2026-02-04",
       tags: ["Strategy", "Alpha", "Core loop validation"],
       roadmap: ["Guild diplomacy", "Replay parser", "Starter AI improvements"]
+    },
+    {
+      id: "21-sink-em",
+      name: "21 Sink'Em",
+      genre: "Card Strategy",
+      platforms: "iOS, Android",
+      lifecycle: "growth",
+      dau: 11800,
+      arpdau: 0.19,
+      d30: 6.2,
+      version: "0.74.2",
+      summary: "Fast-turn card battler focused on sink mechanics and tournament loops.",
+      lastPatch: "2026-02-12",
+      tags: ["Cards", "PvP", "Economy"],
+      roadmap: ["Tournament pass", "Ranked seasons", "Deckbuilder improvements"]
     }
   ],
   studioFiles: [
