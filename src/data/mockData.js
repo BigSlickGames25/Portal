@@ -265,103 +265,13 @@ export const dashboardData = {
   ],
   studioFiles: [
     {
-      id: "file-000",
+      id: "document-001",
       name: "21Holdem_Backend_Download_Ultra_Beginner_Guide.pdf",
-      game: "21 Holdem",
       type: "pdf",
-      owner: "Engineering",
-      updated: "2026-02-13",
-      size: "1.5 MB",
-      status: "approved",
       path: "src/Documents/21Holdem_Backend_Download_Ultra_Beginner_Guide.pdf"
-    },
-    {
-      id: "file-001",
-      name: "Phantom_Circuit_LiveOps_Calendar_Q1.pdf",
-      game: "Phantom Circuit",
-      type: "pdf",
-      owner: "LiveOps",
-      updated: "2026-02-11",
-      size: "2.4 MB",
-      status: "approved"
-    },
-    {
-      id: "file-002",
-      name: "Neon_Drift_Event_Reward_Balancing.xlsx",
-      game: "Neon Drift Rivals",
-      type: "xlsx",
-      owner: "Economy Team",
-      updated: "2026-02-10",
-      size: "864 KB",
-      status: "review"
-    },
-    {
-      id: "file-003",
-      name: "Dungeon_Ledger_Storefront_Copy_v3.docx",
-      game: "Dungeon Ledger",
-      type: "docx",
-      owner: "Content Ops",
-      updated: "2026-02-09",
-      size: "318 KB",
-      status: "draft"
-    },
-    {
-      id: "file-004",
-      name: "Skyforge_AntiCheat_Release_Checklist.pdf",
-      game: "Skyforge Mercs",
-      type: "pdf",
-      owner: "Security Team",
-      updated: "2026-02-08",
-      size: "1.1 MB",
-      status: "approved"
-    },
-    {
-      id: "file-005",
-      name: "Puzzle_Syndicate_Season6_Asset_List.csv",
-      game: "Puzzle Syndicate",
-      type: "csv",
-      owner: "Art Production",
-      updated: "2026-02-07",
-      size: "512 KB",
-      status: "review"
-    },
-    {
-      id: "file-006",
-      name: "Atlas_Tactica_Alpha_Test_Plan.pdf",
-      game: "Atlas Tactica",
-      type: "pdf",
-      owner: "QA Guild",
-      updated: "2026-02-06",
-      size: "760 KB",
-      status: "draft"
     }
   ],
-  fileUpdates: [
-    {
-      when: "2026-02-13 10:05",
-      by: "Engineering",
-      title: "21 Holdem Guide Uploaded",
-      note: "Added beginner backend download guide PDF into Documents."
-    },
-    {
-      when: "2026-02-11 16:40",
-      by: "LiveOps",
-      title: "LiveOps Calendar Approved",
-      note: "Q1 event milestones approved and published to stakeholders."
-    },
-    {
-      when: "2026-02-10 12:20",
-      by: "Economy Team",
-      title: "Reward Balance Sheet Updated",
-      note: "Adjusted reward multipliers for weekend challenge cohort."
-    },
-    {
-      when: "2026-02-09 09:15",
-      by: "Content Ops",
-      title: "Storefront Copy Drafted",
-      note: "Version 3 draft uploaded for localization review."
-    }
-  ],
+  fileUpdates: [],
   securityControls: [
     { title: "CSP + security headers", detail: "Configured in netlify.toml for all routes." },
     { title: "Auth abstraction", detail: "AuthService supports AWS Cognito toggle and role checks." },

@@ -1,46 +1,14 @@
 import { escapeHtml } from "../../services/security.js";
 
-function fileStatusToBadge(status) {
-  if (status === "approved") {
-    return "ok";
-  }
-  if (status === "review") {
-    return "warn";
-  }
-  return "crit";
-}
-
-function titleCase(value = "") {
-  if (!value) {
-    return "";
-  }
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}
-
 function uniqueTypes(files) {
   return Array.from(new Set(files.map((file) => String(file.type ?? "").toLowerCase()).filter(Boolean))).sort();
 }
 
-function statusCounts(files) {
-  return files.reduce(
-    (counts, file) => {
-      const key = String(file.status ?? "").toLowerCase();
-      if (Object.prototype.hasOwnProperty.call(counts, key)) {
-        counts[key] += 1;
-      }
-      return counts;
-    },
-    { approved: 0, review: 0, draft: 0 }
-  );
-}
-
 const filesScreen = {
   title: "Documents",
-  kicker: "Studio Documents",
+  kicker: "Source Documents",
   render(ctx) {
     const files = Array.isArray(ctx.data.studioFiles) ? ctx.data.studioFiles : [];
-    const updates = Array.isArray(ctx.data.fileUpdates) ? ctx.data.fileUpdates : [];
-    const counts = statusCounts(files);
     const types = uniqueTypes(files);
 
     return `
@@ -49,15 +17,15 @@ const filesScreen = {
           <h3>Documents Overview</h3>
           <div class="files-stats">
             <div class="stat-box"><p>Total Documents</p><strong>${files.length}</strong></div>
-            <div class="stat-box"><p>Approved</p><strong>${counts.approved}</strong></div>
-            <div class="stat-box"><p>In Review</p><strong>${counts.review}</strong></div>
-            <div class="stat-box"><p>Draft</p><strong>${counts.draft}</strong></div>
+            <div class="stat-box"><p>Source Folder</p><strong>src/Documents</strong></div>
+            <div class="stat-box"><p>Type</p><strong>${types.length ? escapeHtml(types.join(", ").toUpperCase()) : "-"}</strong></div>
+            <div class="stat-box"><p>Status</p><strong>Live</strong></div>
           </div>
         </article>
-        <article class="panel span-8" data-layout="files-table">
+        <article class="panel span-12" data-layout="files-table">
           <h3>Document Repository</h3>
           <div class="files-controls" data-layout="files-controls">
-            <input id="files-search" type="search" placeholder="Search document name, game, owner...">
+            <input id="files-search" type="search" placeholder="Search document name...">
             <select id="files-type">
               <option value="all">All document types</option>
               ${types.map((type) => `<option value="${escapeHtml(type)}">${escapeHtml(type.toUpperCase())}</option>`).join("")}
@@ -69,12 +37,7 @@ const filesScreen = {
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Game</th>
                   <th>Type</th>
-                  <th>Owner</th>
-                  <th>Updated</th>
-                  <th>Size</th>
-                  <th>Status</th>
                   <th>Open</th>
                 </tr>
               </thead>
@@ -85,23 +48,14 @@ const filesScreen = {
                     <tr
                       class="files-row"
                       data-file-name="${escapeHtml(file.name)}"
-                      data-file-game="${escapeHtml(file.game)}"
-                      data-file-owner="${escapeHtml(file.owner)}"
                       data-file-type="${escapeHtml(String(file.type ?? "").toLowerCase())}"
                     >
                       <td>${escapeHtml(file.name)}</td>
-                      <td>${escapeHtml(file.game)}</td>
                       <td><span class="file-chip">${escapeHtml(String(file.type ?? "").toUpperCase())}</span></td>
-                      <td>${escapeHtml(file.owner)}</td>
-                      <td>${escapeHtml(file.updated)}</td>
-                      <td>${escapeHtml(file.size)}</td>
-                      <td><span class="badge ${fileStatusToBadge(file.status)}">${escapeHtml(titleCase(file.status))}</span></td>
                       <td>
-                        ${
-                          file.path
-                            ? `<a class="file-link" href="${escapeHtml(file.path)}" target="_blank" rel="noreferrer">Open</a>`
-                            : "-"
-                        }
+                        ${file.path
+                          ? `<a class="file-link" href="${escapeHtml(file.path)}" target="_blank" rel="noreferrer">Open PDF</a>`
+                          : "-"}
                       </td>
                     </tr>
                   `
@@ -111,22 +65,6 @@ const filesScreen = {
             </table>
           </div>
           <p id="files-empty" class="empty-note is-hidden">No documents match this filter.</p>
-        </article>
-        <article class="panel span-4" data-layout="files-updates">
-          <h3>Recent Document Updates</h3>
-          <ul class="list">
-            ${updates
-              .map(
-                (item) => `
-                <li class="list-item">
-                  <h4>${escapeHtml(item.title)}</h4>
-                  <p>${escapeHtml(item.when)} | ${escapeHtml(item.by)}</p>
-                  <p>${escapeHtml(item.note)}</p>
-                </li>
-              `
-              )
-              .join("")}
-          </ul>
         </article>
       </section>
     `;
@@ -150,8 +88,6 @@ const filesScreen = {
       rows.forEach((row) => {
         const haystack = [
           row.dataset.fileName ?? "",
-          row.dataset.fileGame ?? "",
-          row.dataset.fileOwner ?? "",
           row.dataset.fileType ?? ""
         ]
           .join(" ")
