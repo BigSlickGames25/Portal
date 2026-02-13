@@ -4,6 +4,7 @@ import { dashboardData } from "./data/mockData.js";
 import { ApiClient } from "./services/apiClient.js";
 import { AuthService } from "./services/authService.js";
 import { createScreens } from "./ui/screens.js";
+import { applyLayout } from "./ui/layout.js";
 
 const screenRoot = document.querySelector("#screen-root");
 const navButtons = Array.from(document.querySelectorAll(".nav-item"));
@@ -112,6 +113,7 @@ async function renderScreen(screenKey, withMotion = true) {
   }
 
   screenRoot.appendChild(nextScreen);
+  applyLayout(nextScreen);
   if (useMotion) {
     nextScreen.animate(
       [
@@ -140,6 +142,7 @@ async function gotoScreen(screenKey, withMotion = true) {
 async function initializeApp() {
   await auth.initialize();
   updateClock();
+  applyLayout(document);
   window.setInterval(updateClock, 1000);
   await gotoScreen(state.activeScreen, false);
 }

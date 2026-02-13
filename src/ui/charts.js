@@ -20,7 +20,7 @@ function getAxisLines(width, height, left, right, top, bottom, ticks) {
   for (let i = 0; i < ticks; i += 1) {
     const y = top + (usableHeight / (ticks - 1)) * i;
     lines.push(
-      `<line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="rgba(146,197,236,0.12)" stroke-width="1" />`
+      `<line x1="${left}" y1="${y}" x2="${width - right}" y2="${y}" stroke="rgba(141,196,220,0.14)" stroke-width="1" />`
     );
   }
   return lines.join("");
@@ -55,7 +55,7 @@ export function renderLineChart(container, values, labels = []) {
   const dots = points
     .map(
       (point) =>
-        `<circle cx="${point.x}" cy="${point.y}" r="4.2" fill="#3de1af" stroke="#0a1928" stroke-width="2"></circle>`
+        `<circle cx="${point.x}" cy="${point.y}" r="4.2" fill="#39c7ff" stroke="#041722" stroke-width="2"></circle>`
     )
     .join("");
 
@@ -72,13 +72,13 @@ export function renderLineChart(container, values, labels = []) {
     `
       <defs>
         <linearGradient id="line-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(61,225,175,0.35)"></stop>
-          <stop offset="100%" stop-color="rgba(61,225,175,0)"></stop>
+          <stop offset="0%" stop-color="rgba(57,199,255,0.35)"></stop>
+          <stop offset="100%" stop-color="rgba(57,199,255,0)"></stop>
         </linearGradient>
       </defs>
       ${getAxisLines(width, height, left, right, top, bottom, 5)}
       <polygon points="${areaPoints}" fill="url(#line-fill)"></polygon>
-      <polyline points="${polyline}" fill="none" stroke="#3de1af" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
+      <polyline points="${polyline}" fill="none" stroke="#39c7ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>
       ${dots}
       ${xLabels}
     `
@@ -115,7 +115,7 @@ export function renderBarChart(container, bars) {
     const yPrimary = top + usableHeight - primaryHeight;
 
     shapes.push(
-      `<rect x="${x}" y="${yPrimary}" width="${primaryWidth}" height="${primaryHeight}" rx="4" fill="#1db6d6"></rect>`
+      `<rect x="${x}" y="${yPrimary}" width="${primaryWidth}" height="${primaryHeight}" rx="4" fill="#22b8a8"></rect>`
     );
 
     if (hasSecondary && bar.secondary !== undefined) {
@@ -123,7 +123,7 @@ export function renderBarChart(container, bars) {
       const ySecondary = top + usableHeight - secondaryHeight;
       const xSecondary = x + primaryWidth + groupWidth * 0.1;
       shapes.push(
-        `<rect x="${xSecondary}" y="${ySecondary}" width="${secondaryWidth}" height="${secondaryHeight}" rx="4" fill="#ffb960"></rect>`
+        `<rect x="${xSecondary}" y="${ySecondary}" width="${secondaryWidth}" height="${secondaryHeight}" rx="4" fill="#ffc778"></rect>`
       );
     }
 
@@ -180,7 +180,7 @@ export function renderDonutChart(container, slices) {
       const portion = slice.value / total;
       const end = angle + portion * Math.PI * 2;
       const path = describeArc(cx, cy, radius, angle, end);
-      const color = slice.color ?? ["#1db6d6", "#3de1af", "#ffb960", "#ff6f91", "#95c6ff"][index % 5];
+      const color = slice.color ?? ["#39c7ff", "#22b8a8", "#ffc778", "#ff8f97", "#86e6ff"][index % 5];
       angle = end;
       return `<path d="${path}" stroke="${color}" stroke-width="${stroke}" fill="none" stroke-linecap="butt"></path>`;
     })
@@ -190,9 +190,9 @@ export function renderDonutChart(container, slices) {
     width,
     height,
     `
-      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="rgba(146,197,236,0.12)" stroke-width="${stroke}"></circle>
+      <circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="rgba(141,196,220,0.14)" stroke-width="${stroke}"></circle>
       ${arcs}
-      <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="#dff4ff" font-size="30" font-weight="700">${Math.round(
+      <text x="${cx}" y="${cy - 4}" text-anchor="middle" fill="#ecf7ff" font-size="30" font-weight="700">${Math.round(
         total
       )}</text>
       <text x="${cx}" y="${cy + 20}" text-anchor="middle" fill="rgba(188,220,240,0.88)" font-size="12">Total Share</text>

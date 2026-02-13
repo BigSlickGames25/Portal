@@ -10,20 +10,21 @@
 </head>
 <body>
   <div class="ambient-layer" aria-hidden="true"></div>
-  <div class="portal-app">
-    <aside class="sidebar">
+  <div class="portal-app" data-layout="global-app">
+    <aside class="sidebar" data-layout="global-sidebar">
       <div class="brand">
         <p class="brand-kicker">Big Slick Games</p>
         <h1>Management Portal</h1>
         <p class="brand-subtitle">Studio operations and business intelligence</p>
       </div>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary" data-layout="global-nav">
         <button class="nav-item is-active" data-screen="overview" type="button">Overview</button>
         <button class="nav-item" data-screen="finance" type="button">Finance</button>
         <button class="nav-item" data-screen="users" type="button">Users</button>
         <button class="nav-item" data-screen="changes" type="button">Game Changes</button>
         <button class="nav-item" data-screen="calendar" type="button">Calendar</button>
-        <button class="nav-item" data-screen="library" type="button">Game Library</button>
+        <button class="nav-item" data-screen="library" type="button">Games Catalog</button>
+        <button class="nav-item" data-screen="files" type="button">Documents</button>
         <button class="nav-item" data-screen="security" type="button">Security</button>
       </nav>
       <section class="sidebar-footer">
@@ -31,8 +32,8 @@
         <p id="env-label">local</p>
       </section>
     </aside>
-    <div class="workspace">
-      <header class="topbar">
+    <div class="workspace" data-layout="global-workspace">
+      <header class="topbar" data-layout="global-topbar">
         <div>
           <p id="screen-kicker" class="eyebrow">Operations</p>
           <h2 id="screen-title">Overview</h2>
@@ -43,7 +44,7 @@
           <p id="clock" class="clock">--:--:--</p>
         </div>
       </header>
-      <main id="screen-root" class="screen-root" aria-live="polite"></main>
+      <main id="screen-root" class="screen-root" aria-live="polite" data-layout="global-screen-root"></main>
     </div>
   </div>
   <script type="module" src="src/main.js"></script>
