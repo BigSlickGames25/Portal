@@ -54,7 +54,9 @@ const filesScreen = {
                       <td><span class="file-chip">${escapeHtml(String(file.type ?? "").toUpperCase())}</span></td>
                       <td>
                         ${file.path
-                          ? `<a class="file-link" href="${escapeHtml(file.path)}" target="_blank" rel="noreferrer">Open PDF</a>`
+                          ? `<a class="file-link" href="${escapeHtml(file.path)}" target="_blank" rel="noreferrer">${
+                              String(file.type ?? "").toLowerCase() === "pdf" ? "Open PDF" : "Open File"
+                            }</a>`
                           : "-"}
                       </td>
                     </tr>
@@ -79,6 +81,10 @@ const filesScreen = {
     if (!searchInput || !typeSelect || !resultsNode || !emptyNode) {
       return;
     }
+
+    // Reset controls in case the browser restores prior form state.
+    searchInput.value = "";
+    typeSelect.value = "all";
 
     const applyFilters = () => {
       const query = searchInput.value.trim().toLowerCase();

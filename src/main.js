@@ -1,9 +1,9 @@
 import { authConfig } from "./config/authConfig.js";
 import { envConfig } from "./config/env.js";
-import { dashboardData } from "./data/mockData.js";
+import { dashboardData } from "./data/mockData.js?v=mini-portal-20260216";
 import { ApiClient } from "./services/apiClient.js";
 import { AuthService } from "./services/authService.js";
-import { createScreens } from "./ui/screens.js";
+import { createScreens } from "./ui/screens.js?v=mini-portal-20260216";
 import { applyLayout } from "./ui/layout.js";
 
 const screenRoot = document.querySelector("#screen-root");

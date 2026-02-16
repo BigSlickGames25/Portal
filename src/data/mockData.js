@@ -284,6 +284,12 @@ export const dashboardData = {
       name: "21Holdem_Backend_Download_Ultra_Beginner_Guide.pdf",
       type: "pdf",
       path: "src/Documents/21Holdem_Backend_Download_Ultra_Beginner_Guide.pdf"
+    },
+    {
+      id: "document-002",
+      name: "DEVELOPMENT_DEPLOYMENT_PIPELINE_USER_GUIDE.md",
+      type: "md",
+      path: "DEVELOPMENT_DEPLOYMENT_PIPELINE_USER_GUIDE.md"
     }
   ],
   fileUpdates: [],
