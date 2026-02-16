@@ -775,6 +775,70 @@ select {
   background: rgba(10, 31, 45, 0.74);
 }
 
+.mini-portal {
+  display: grid;
+  gap: 0.62rem;
+}
+
+.mini-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mini-tab {
+  border: 1px solid rgba(196, 202, 220, 0.35);
+  border-radius: 999px;
+  background: rgba(14, 38, 54, 0.72);
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.24rem 0.58rem;
+}
+
+.mini-tab:hover {
+  border-color: rgba(214, 219, 234, 0.55);
+  color: var(--text-main);
+}
+
+.mini-tab.is-active {
+  border-color: rgba(57, 199, 255, 0.72);
+  color: var(--text-main);
+  box-shadow: inset 0 0 0 1px rgba(57, 199, 255, 0.4);
+}
+
+.mini-portal-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 0.62rem;
+}
+
+.mini-information-section,
+.mini-stats-window {
+  border: 1px solid rgba(192, 199, 216, 0.24);
+  border-radius: 10px;
+  background: rgba(13, 37, 52, 0.62);
+  padding: 0.58rem;
+}
+
+.mini-information-section h4,
+.mini-stats-window h4 {
+  margin: 0 0 0.48rem;
+}
+
+.mini-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.46rem;
+}
+
+.mini-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.46rem;
+}
+
 .detail-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -882,6 +946,10 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .mini-portal-grid {
+    grid-template-columns: 1fr;
+  }
+
   .security-grid {
     grid-template-columns: 1fr;
   }
@@ -916,6 +984,11 @@ select {
 
   .catalog-stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mini-info-grid,
+  .mini-stats-grid {
+    grid-template-columns: 1fr;
   }
 
   .detail-grid {

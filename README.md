@@ -1,72 +1,185 @@
-# Big Slick Games Portal
+# Portal Web App (Library Module)
 
-Business management portal for game operations, user analytics, finance, release tracking, and a game information library.
+Full-stack portal app with a left-side menu and a functional Library module.
 
-## What is included
+## Stack
 
-- Multi-screen portal:
-  - `Overview`: KPIs, alerts, growth and revenue charts, strategic stats.
-  - `Finance`: spend allocation, revenue vs spend, chip economy health.
-  - `Users`: retention funnel, monetization segment split, cohort table.
-  - `Game Changes`: release velocity and live change timeline.
-  - `Calendar`: monthly milestone/release planning board.
-  - `Game Library`: searchable title catalog with metrics and roadmap detail.
-  - `Security`: auth status, API wiring state, hardening checklist.
-- Animated screen transitions and interactive visual components.
-- Built-in chart rendering (no external dependencies).
-- Staged auth setup with AWS Cognito placeholders (disabled by default).
-- API client abstraction ready for future staging AWS endpoints.
-- Netlify setup with SPA redirect and security headers.
+- Frontend: React + TypeScript + Vite + React Router
+- Backend: Node.js + Express + Zod
+- Database: SQLite + Prisma ORM
+- Uploads: Local files in `server/uploads` and static hosting via `/uploads`
+- Auth: Dev-role login (Admin / Editor / Viewer) with localStorage
 
-## Run locally
+## Repository Structure
 
-No build step is required.
-
-```powershell
-cd d:\Portal
-python -m http.server 5173
+```text
+/
+├─ client/   # Vite React app
+├─ server/   # Express API + Prisma + uploads
+└─ package.json
 ```
 
-Then open `http://localhost:5173`.
+## Features Implemented
 
-## Auth setup (staged, not active yet)
+- Role-based login (Admin / Editor / Viewer)
+- Left-side portal navigation:
+  - Dashboard
+  - Library
+  - Categories (Admin only)
+  - Templates (Admin only)
+- Library module:
+  - Entries and Tasks tabs
+  - Debounced search
+  - Filters (category, tags, status, owner, priority)
+  - Grid/list toggle
+  - Quick actions: View, Edit, Duplicate, Archive
+  - Archive as default delete behavior
+  - Hard delete on detail page for Admin only
+- Template builder (Admin only):
+  - Template CRUD for ENTRY and TASK
+  - JSON-backed steps + flow field definitions
+- Wizard create flows:
+  - `/library/entry/new` -> select template -> step-by-step wizard
+  - `/library/task/new` -> select template -> step-by-step wizard
+  - Step validation + review summary page
+- Category and template management with route guards
+- Image/file uploads to server and URL attachment to records
+- Seed data for categories, entries, tasks, templates
 
-Auth is intentionally off right now:
+## Environment Setup
 
-- File: `src/config/authConfig.js`
-- Current: `enabled: false`
+### 1. Install dependencies
 
-When AWS staging auth is ready:
+Run from repo root:
 
-1. Set `enabled: true`.
-2. Fill:
-   - `userPoolId`
-   - `userPoolClientId`
-   - `hostedUiDomain`
-3. Replace `AuthService.loginAs()` and `logout()` placeholder behavior with Cognito hosted UI flow.
-4. Point `envConfig.apiBaseUrl` to your staging API gateway/domain.
-
-## Netlify deploy
-
-- `netlify.toml` already includes:
-  - publish directory: root (`.`)
-  - SPA redirect: `/* -> /index.html`
-  - baseline security headers
-
-Deploy by connecting this repo to Netlify and choosing the root as publish directory.
-
-## GitHub remote
-
-This project is intended for:
-
-- `https://github.com/BigSlickGames25/Portal.git`
-
-If you are starting fresh:
-
-```powershell
-git init -b main
-git remote add origin https://github.com/BigSlickGames25/Portal.git
-git add .
-git commit -m "Initial portal scaffold"
-git push -u origin main
+```bash
+npm install
 ```
+
+### 2. Server environment
+
+Create `server/.env`:
+
+```env
+DATABASE_URL="file:./dev.db"
+PORT=4000
+```
+
+You can copy from `server/.env.example`.
+
+### 3. Client environment (optional)
+
+Create `client/.env` if needed:
+
+```env
+VITE_API_BASE_URL=http://localhost:4000/api
+VITE_API_ORIGIN=http://localhost:4000
+```
+
+Defaults already point to localhost if this file is missing.
+
+## Scripts
+
+Run all from repo root:
+
+```bash
+npm run dev
+npm run seed
+npm run reset
+```
+
+### What each script does
+
+- `npm run dev`: runs server and client concurrently
+- `npm run seed`: pushes Prisma schema and seeds categories/templates/entries/tasks
+- `npm run reset`: resets DB from schema and seeds again
+
+## API Routes
+
+Base URL: `http://localhost:4000/api`
+
+### Health / Dashboard
+
+- `GET /health`
+- `GET /dashboard`
+
+### Categories
+
+- `GET /categories`
+- `POST /categories` (Admin)
+- `PUT /categories/:id` (Admin)
+- `DELETE /categories/:id` (Admin)
+
+### Templates
+
+- `GET /templates`
+- `POST /templates` (Admin)
+- `PUT /templates/:id` (Admin)
+- `DELETE /templates/:id` (Admin)
+
+### Entries
+
+- `GET /entries`
+- `GET /entries/:id`
+- `POST /entries` (Admin, Editor)
+- `PUT /entries/:id` (Admin, Editor)
+- `POST /entries/:id/duplicate` (Admin, Editor)
+- `POST /entries/:id/archive` (Admin, Editor)
+- `DELETE /entries/:id` (Admin)
+
+### Tasks
+
+- `GET /tasks`
+- `GET /tasks/:id`
+- `POST /tasks` (Admin, Editor)
+- `PUT /tasks/:id` (Admin, Editor)
+- `POST /tasks/:id/duplicate` (Admin, Editor)
+- `POST /tasks/:id/archive` (Admin, Editor)
+- `DELETE /tasks/:id` (Admin)
+
+### Uploads
+
+- `POST /upload` (Admin, Editor)
+  - form-data field: `file`
+  - allowed: png/jpg/webp/pdf/zip
+  - max size: 10MB
+- static files served at:
+  - `GET /uploads/<filename>`
+
+## Frontend Routes
+
+- `/login`
+- `/`
+- `/library`
+- `/library/entry/new`
+- `/library/task/new`
+- `/library/entry/:id`
+- `/library/task/:id`
+- `/library/entry/:id/edit`
+- `/library/task/:id/edit`
+- `/categories` (Admin)
+- `/templates` (Admin)
+
+## Screenshot Placeholders
+
+### Screenshot: Login (Role Selector)
+
+### Screenshot: Dashboard
+
+### Screenshot: Library Entries Grid
+
+### Screenshot: Library Tasks List
+
+### Screenshot: Entry Wizard Step Flow
+
+### Screenshot: Task Wizard Review Step
+
+### Screenshot: Template Builder
+
+### Screenshot: Categories Management
+
+## Notes
+
+- Dev auth is intentionally simple and not secure for production.
+- Uploaded files are local-only; use object storage in production.
+- SQLite is intended for local/dev use.

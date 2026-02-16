@@ -3,3 +3,10 @@
 .env.*
 node_modules
 *.log
+client/node_modules
+server/node_modules
+server/uploads
+server/prisma/dev.db
+server/prisma/dev.db-journal
+dist
+client/dist

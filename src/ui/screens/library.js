@@ -1,4 +1,4 @@
-import { renderDetail } from "../components/gameDetail.js";
+import { renderDetail } from "../components/gameDetail.js?v=mini-portal-20260213";
 import { compactFormatter } from "../formatters.js";
 import { escapeHtml } from "../../services/security.js";
 
@@ -145,15 +145,24 @@ const libraryScreen = {
     }
 
     let activeId = gameCards[0]?.dataset.gameId ?? null;
+    let activeTab = "overview";
 
     const setActive = (gameId) => {
       activeId = gameId;
+      activeTab = "overview";
       gameCards.forEach((card) => {
         card.classList.toggle("is-active", card.dataset.gameId === gameId);
       });
       const game = games.find((item) => item.id === gameId);
       if (game) {
-        detailRoot.innerHTML = renderDetail(game);
+        detailRoot.innerHTML = renderDetail(game, activeTab);
+      }
+    };
+
+    const renderActiveDetail = () => {
+      const game = games.find((item) => item.id === activeId);
+      if (game) {
+        detailRoot.innerHTML = renderDetail(game, activeTab);
       }
     };
 
@@ -230,6 +239,16 @@ const libraryScreen = {
       }
       setActive(button.dataset.gameId);
     });
+
+    detailRoot.addEventListener("click", (event) => {
+      const tabButton = event.target.closest("[data-mini-tab]");
+      if (!tabButton) {
+        return;
+      }
+      activeTab = tabButton.dataset.miniTab ?? "overview";
+      renderActiveDetail();
+    });
+
     searchInput.addEventListener("input", applyFilters);
     statusSelect.addEventListener("change", applyFilters);
     platformSelect.addEventListener("change", applyFilters);

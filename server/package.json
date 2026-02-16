@@ -1,0 +1,26 @@
+{
+  "name": "portal-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run db:push && nodemon src/index.js",
+    "start": "npm run db:push && node src/index.js",
+    "db:push": "prisma db push",
+    "db:reset": "prisma db push --force-reset",
+    "seed": "npm run db:push && node prisma/seed.js",
+    "reset": "npm run db:reset && node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
+    "multer": "^1.4.5-lts.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "prisma": "^6.3.1"
+  }
+}

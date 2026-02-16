@@ -3,8 +3,9 @@ import { financeScreen } from "./screens/finance.js";
 import { usersScreen } from "./screens/users.js";
 import { changesScreen } from "./screens/changes.js";
 import { calendarScreen } from "./screens/calendar.js";
-import { libraryScreen } from "./screens/library.js";
+import { libraryScreen } from "./screens/library.js?v=mini-portal-20260213";
 import { filesScreen } from "./screens/files.js";
+import { libraryDocsScreen } from "./screens/libraryDocs.js";
 import { securityScreen } from "./screens/security.js";
 
 function createScreens() {
@@ -16,6 +17,7 @@ function createScreens() {
     calendar: calendarScreen,
     library: libraryScreen,
     files: filesScreen,
+    librarydocs: libraryDocsScreen,
     security: securityScreen
   };
 }

@@ -103,6 +103,12 @@ export const layoutConfig = {
     // Recent file activity feed panel.
     "files-updates": { offsetX: 0, offsetY: 0, scaleX: 1, scaleY: 1 },
 
+    // LIBRARY SCREEN (GUIDES)
+    // Top summary panel for guide/resource counts.
+    "librarydocs-overview": { offsetX: 0, offsetY: 0, scaleX: 1, scaleY: 1 },
+    // Main table containing resource links.
+    "librarydocs-table": { offsetX: 0, offsetY: 0, scaleX: 1, scaleY: 1 },
+
     // SECURITY SCREEN
     // Authentication status panel.
     "security-auth": { offsetX: 0, offsetY: 0, scaleX: 1, scaleY: 1 },

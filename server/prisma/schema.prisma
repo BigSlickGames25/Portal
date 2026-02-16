@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+enum TemplateType {
+  ENTRY
+  TASK
+}
+
+enum EntryStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  DONE
+  ARCHIVED
+}
+
+model Category {
+  id          Int            @id @default(autoincrement())
+  name        String
+  description String
+  icon        String?
+  color       String?
+  sortOrder   Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  entries     LibraryEntry[]
+  tasks       TaskCard[]
+}
+
+model Template {
+  id          Int          @id @default(autoincrement())
+  name        String
+  type        TemplateType
+  description String
+  steps       Json
+  fields      Json
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model LibraryEntry {
+  id               Int         @id @default(autoincrement())
+  title            String
+  shortDescription String
+  fullDescription  String
+  categoryId       Int
+  category         Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  tags             Json
+  status           EntryStatus @default(DRAFT)
+  coverImageUrl    String?
+  galleryImageUrls Json
+  attachmentUrls   Json
+  linkUrls         Json
+  createdBy        String
+  updatedBy        String
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model TaskCard {
+  id             Int          @id @default(autoincrement())
+  title          String
+  objective      String
+  stepsChecklist Json
+  owner          String
+  dueDate        DateTime?
+  priority       TaskPriority @default(MEDIUM)
+  status         TaskStatus   @default(TODO)
+  categoryId     Int
+  category       Category     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  tags           Json
+  imageUrls      Json
+  attachmentUrls Json
+  notes          String?
+  relatedEntryIds Json
+  createdBy      String
+  updatedBy      String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
